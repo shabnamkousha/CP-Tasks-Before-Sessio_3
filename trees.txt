@@ -1,0 +1,46 @@
+1- Given a binary tree, return the inorder traversal of its nodes’ values.
+
+public class Solution {
+	public ArrayList<Integer> inorderTraversal(TreeNode a) {
+	    ArrayList<Integer> res_ar = new ArrayList<Integer>();
+
+        if(a == null)
+            return res_ar; 
+ 
+        TreeNode p = a;
+
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+ 
+        while(!stack.empty() || p != null){
+            if(p != null){
+                stack.push(p);
+                p = p.left;
+            }else{
+                TreeNode tree = stack.pop();
+                res_ar.add(tree.val);
+                p = tree.right;
+            }
+        }
+ 
+        return res_ar;
+	}
+}
+
+
+-----------------------------------------------------
+
+2- Given a binary tree, find its maximum depth. 
+
+public class Solution {
+	public int maxDepth(TreeNode a) {
+	    if(a==null){
+	        return 0;
+	    }
+	   
+	    int right_side = maxDepth(a.right);
+	    int left_side = maxDepth(a.left);
+ 
+        int longer_path = Math.max(left_side, right_side);
+        return longer_path+1;
+	}
+}
