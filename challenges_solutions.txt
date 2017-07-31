@@ -1,0 +1,74 @@
+Wrote and sucessfully ran on interviewbit (took 2 hours)
+
+- Challenge 1
+
+public class Solution {
+	public int isValidBST(TreeNode a) {
+	    return isValidBST(a, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+	}
+	
+	public int isValidBST(TreeNode nt, double min, double max){
+    if(nt==null) 
+        return 1;
+ 
+    if(nt.val <= min || nt.val >= max)
+        return 0;
+ 
+    int first_res=isValidBST(nt.left, (double) min, (double) nt.val);
+    int second_res=isValidBST(nt.right, (double) nt.val, (double)max);
+    if(first_res==1 && second_res==1){
+        return 1;
+    }
+    return 0 ;
+    }
+}
+
+- Challenge 3
+
+public class Solution {
+	public int isSameTree(TreeNode a, TreeNode b) {
+	    if(a==null && b==null){
+	        return 1;
+	    } 
+	    
+	    if(a!=null && b!=null){
+	        if(a.val == b.val && isSameTree(a.left,b.left)==1 && isSameTree(a.left,b.left)==1){
+	           return 1; 
+	        }
+	        
+	    }
+	    
+	    return 0;
+	}
+}
+
+- Challenge 4
+
+public class Solution {
+	public int hasPathSum(TreeNode a, int b) {
+	    
+	    if (a == null){
+	        if(b==0)
+	            return 1;
+            return 0;
+        } else
+        {
+            int result = 0;
+  
+            int subsum = b - a.val;
+            if (subsum == 0 && a.left == null && a.right == null)
+                return 1;
+            if (a.left != null)
+                if(result==1 || hasPathSum(a.left, subsum)==1)
+                    result = 1;
+                 else
+                    result = 0;
+            if (a.right != null)
+                if(result==1 || hasPathSum(a.right, subsum)==1)
+                    result = 1;
+                 else
+                    result = 0;
+            return result;
+        }
+	}
+}
